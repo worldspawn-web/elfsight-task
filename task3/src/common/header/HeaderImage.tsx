@@ -5,4 +5,6 @@ export const HeaderImage = styled.img`
   height: 100%;
 
   object-fit: cover;
+
+  border-bottom: 2px solid grey;
 `;
