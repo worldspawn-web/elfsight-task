@@ -1,16 +1,14 @@
-// import { getCharacter } from 'rickmortyapi';
-
 import styles from './App.module.css';
 import { Header, HeaderImage } from './common';
+import { RenderCards } from './common/renders/renderCards';
 
-function App() {
+export const App = () => {
   return (
     <div className={styles.page}>
       <Header>
         <HeaderImage src="./public/banner.jpg" />
       </Header>
+      <RenderCards />
     </div>
   );
-}
-
-export default App;
+};
