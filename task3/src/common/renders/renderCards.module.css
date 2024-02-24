@@ -1,3 +1,14 @@
+.header {
+  text-align: center;
+
+  color: var(--red);
+
+  font-size: 48px;
+  font-family: 'Archangelsk';
+
+  margin: 30px auto;
+}
+
 .cards__wrapper {
   width: 100vw;
   height: 100vh;
@@ -23,6 +34,15 @@
   background-color: var(--background-light);
 
   border-radius: 10px;
+
+  transition: 0.3s all ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 5px 15px #fb6467ff);
+
+  cursor: pointer;
 }
 
 .card__img {
@@ -66,6 +86,7 @@
 }
 
 .card__status {
+  margin-left: 10px;
   margin-top: 10px;
 
   font-size: 18px;
@@ -101,4 +122,37 @@
 
   font-size: 18px;
   font-family: 'Archangelsk';
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+
+  margin: 10px auto;
+}
+
+.filter {
+  background-color: transparent;
+
+  border: 0 solid black;
+  border-radius: 10px;
+
+  color: var(--red);
+
+  margin: 0 20px;
+  padding: 10px;
+
+  text-align: center;
+
+  outline: none;
+
+  transition: 0.3s all ease;
+}
+
+.filter:hover {
+  border: 1px solid var(--red);
+}
+
+.filter:focus {
+  border: 1px solid var(--red);
 }
