@@ -1,1 +1,1 @@
-export { RenderCards } from './renderCards';
+export { RenderCards } from './RenderCards';
