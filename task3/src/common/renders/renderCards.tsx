@@ -2,17 +2,30 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Character } from 'rickmortyapi';
 
-import styles from './renderCards.module.css';
-import { CardStatus } from '..';
+import styles from './RenderCards.module.css';
+import { renderCharacters } from './renderCharacters';
 
 export const RenderCards = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
+
+  const [nameFilter, setNameFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [speciesFilter, setSpeciesFilter] = useState('');
+  const [genderFilter, setGenderFilter] = useState('');
 
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
         const response = await axios.get(
-          'https://rickandmortyapi.com/api/character'
+          'https://rickandmortyapi.com/api/character',
+          {
+            params: {
+              name: nameFilter,
+              status: statusFilter,
+              species: speciesFilter,
+              gender: genderFilter,
+            },
+          }
         );
         setCharacters(response.data.results);
       } catch (error) {
@@ -21,39 +34,59 @@ export const RenderCards = () => {
     };
 
     fetchCharacters();
-  }, []);
+  }, [nameFilter, statusFilter, speciesFilter, genderFilter]);
 
-  const renderAliveStatus = (status: string) => {
-    if (status === 'Dead') return <CardStatus />;
-    if (status === 'Alive') return <CardStatus $alive />;
-    return <CardStatus $unknown />;
+  const handleFilterChange = (filterType: string, value: string) => {
+    switch (filterType) {
+      case 'name':
+        setNameFilter(value);
+        break;
+      case 'status':
+        setStatusFilter(value);
+        break;
+      case 'species':
+        setSpeciesFilter(value);
+        break;
+      case 'gender':
+        setGenderFilter(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
-    <div className={styles.cards__wrapper}>
-      {characters.map((character) => (
-        <div className={styles.card}>
-          <img className={styles.card__img} src={character.image} />
-          <div className={styles.card__header__wrapper}>
-            <a className={styles.card__header} href={character.url}>
-              {renderAliveStatus(character.status)}
-              {character.name}
-            </a>
-            <a className={styles.card__status}>Status: {character.status}</a>
-          </div>
-
-          <section className={styles.card__info}>
-            <p className={styles.card__category}>Location:</p>
-            <a className={styles.card__details} href={character.location.url}>
-              {character.location.name}
-            </a>
-            <p className={styles.card__category}>Gender:</p>
-            <a className={styles.card__details}>{character.gender}</a>
-            <p className={styles.card__category}>Species:</p>
-            <a className={styles.card__details}>{character.species}</a>
-          </section>
-        </div>
-      ))}
-    </div>
+    <>
+      <h2 className={styles.header}>Rick & Morty Wiki</h2>
+      <div className={styles.filters}>
+        <input
+          className={styles.filter}
+          type="text"
+          placeholder="Name"
+          onChange={(e) => handleFilterChange('name', e.target.value)}
+        />
+        <input
+          className={styles.filter}
+          type="text"
+          placeholder="Status"
+          onChange={(e) => handleFilterChange('status', e.target.value)}
+        />
+        <input
+          className={styles.filter}
+          type="text"
+          placeholder="Species"
+          onChange={(e) => handleFilterChange('species', e.target.value)}
+        />
+        <input
+          className={styles.filter}
+          type="text"
+          placeholder="Gender"
+          onChange={(e) => handleFilterChange('gender', e.target.value)}
+        />
+      </div>
+      <div className={styles.cards__wrapper}>
+        {renderCharacters(characters)}
+      </div>
+    </>
   );
 };
