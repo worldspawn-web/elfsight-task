@@ -3,9 +3,16 @@ import { Character } from 'rickmortyapi';
 import { renderAliveStatus } from '..';
 import styles from './RenderCards.module.css';
 
-export const renderCharacters = (characters: Character[]) => {
+export const renderCharacters = (
+  characters: Character[],
+  onCharacterClick: (character: Character) => void
+) => {
   return characters.map((character) => (
-    <div className={styles.card} key={character.id}>
+    <div
+      className={styles.card}
+      key={character.id}
+      onClick={() => onCharacterClick(character)}
+    >
       <img className={styles.card__img} src={character.image} />
       <div className={styles.card__header__wrapper}>
         <a className={styles.card__header} href={character.url}>
