@@ -13,6 +13,11 @@ export const RenderCards = () => {
   const [speciesFilter, setSpeciesFilter] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
 
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null
+  );
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
@@ -55,6 +60,20 @@ export const RenderCards = () => {
     }
   };
 
+  const openPopUp = (character: Character) => {
+    setSelectedCharacter(character);
+    setIsPopUpOpen(true);
+  };
+
+  const closePopUp = () => {
+    setSelectedCharacter(null);
+    setIsPopUpOpen(false);
+  };
+
+  const handleCharacterClick = (character: Character) => {
+    openPopUp(character);
+  };
+
   return (
     <>
       <h2 className={styles.header}>Rick & Morty Wiki</h2>
@@ -85,8 +104,41 @@ export const RenderCards = () => {
         />
       </div>
       <div className={styles.cards__wrapper}>
-        {renderCharacters(characters)}
+        {renderCharacters(characters, handleCharacterClick)}
       </div>
+
+      {isPopUpOpen && selectedCharacter && (
+        <div className={styles.popup}>
+          <div className={styles.popup__content}>
+            <h3 className={styles.popup__name}>{selectedCharacter.name}</h3>
+            <img
+              className={styles.popup__image}
+              src={selectedCharacter.image}
+            />
+            <section className={styles.popup__stats}>
+              <p>
+                Status: <span>{selectedCharacter.status}</span>
+              </p>
+              <p>
+                Species: <span>{selectedCharacter.species}</span>
+              </p>
+              <p>
+                Gender: <span>{selectedCharacter.gender}</span>
+              </p>
+              <p>
+                Location:{' '}
+                <a href={selectedCharacter.location.url}>
+                  {selectedCharacter.location.name}
+                </a>
+              </p>
+            </section>
+
+            <button className={styles.popup__button} onClick={closePopUp}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
