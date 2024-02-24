@@ -1,6 +1,6 @@
 import styles from './App.module.css';
 import { Header, HeaderImage } from './common';
-import { RenderCards } from './common/renders/renderCards';
+import { RenderCards } from './common/renders';
 
 export const App = () => {
   return (
