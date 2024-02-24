@@ -1,0 +1,1 @@
+export { renderAliveStatus } from './renderStatus';
