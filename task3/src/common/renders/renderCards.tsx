@@ -2,8 +2,22 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Character } from 'rickmortyapi';
 
-import styles from './RenderCards.module.css';
 import { renderCharacters } from './renderCharacters';
+import {
+  CardFilter,
+  CardFiltersDiv,
+  CardsSectionHeader,
+  CardsWrapper,
+  PopUpAnchor,
+  PopUpButton,
+  PopUpContent,
+  PopUpHeader,
+  PopUpImage,
+  PopUpParagraph,
+  PopUpStat,
+  PopUpStats,
+  PopUpWrapper,
+} from '..';
 
 export const RenderCards = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -76,68 +90,59 @@ export const RenderCards = () => {
 
   return (
     <section>
-      <h2 className={styles.header}>Rick & Morty Wiki</h2>
-      <div className={styles.filters}>
-        <input
-          className={styles.filter}
+      <CardsSectionHeader>Rick & Morty Wiki</CardsSectionHeader>
+      <CardFiltersDiv>
+        <CardFilter
           type="text"
           placeholder="Name"
           onChange={(e) => handleFilterChange('name', e.target.value)}
         />
-        <input
-          className={styles.filter}
+        <CardFilter
           type="text"
           placeholder="Status"
           onChange={(e) => handleFilterChange('status', e.target.value)}
         />
-        <input
-          className={styles.filter}
+        <CardFilter
           type="text"
           placeholder="Species"
           onChange={(e) => handleFilterChange('species', e.target.value)}
         />
-        <input
-          className={styles.filter}
+        <CardFilter
           type="text"
           placeholder="Gender"
           onChange={(e) => handleFilterChange('gender', e.target.value)}
         />
-      </div>
-      <div className={styles.cards__wrapper}>
+      </CardFiltersDiv>
+      <CardsWrapper>
         {renderCharacters(characters, handleCharacterClick)}
-      </div>
+      </CardsWrapper>
 
       {isPopUpOpen && selectedCharacter && (
-        <div className={styles.popup}>
-          <div className={styles.popup__content}>
-            <h3 className={styles.popup__name}>{selectedCharacter.name}</h3>
-            <img
-              className={styles.popup__image}
-              src={selectedCharacter.image}
-            />
-            <section className={styles.popup__stats}>
-              <p>
-                Status: <span>{selectedCharacter.status}</span>
-              </p>
-              <p>
-                Species: <span>{selectedCharacter.species}</span>
-              </p>
-              <p>
-                Gender: <span>{selectedCharacter.gender}</span>
-              </p>
-              <p>
+        <PopUpWrapper>
+          <PopUpContent>
+            <PopUpHeader>{selectedCharacter.name}</PopUpHeader>
+            <PopUpImage src={selectedCharacter.image} />
+            <PopUpStats>
+              <PopUpParagraph>
+                Status: <PopUpStat>{selectedCharacter.status}</PopUpStat>
+              </PopUpParagraph>
+              <PopUpParagraph>
+                Species: <PopUpStat>{selectedCharacter.species}</PopUpStat>
+              </PopUpParagraph>
+              <PopUpParagraph>
+                Gender: <PopUpStat>{selectedCharacter.gender}</PopUpStat>
+              </PopUpParagraph>
+              <PopUpParagraph>
                 Location:{' '}
-                <a href={selectedCharacter.location.url}>
+                <PopUpAnchor href={selectedCharacter.location.url}>
                   {selectedCharacter.location.name}
-                </a>
-              </p>
-            </section>
+                </PopUpAnchor>
+              </PopUpParagraph>
+            </PopUpStats>
 
-            <button className={styles.popup__button} onClick={closePopUp}>
-              Close
-            </button>
-          </div>
-        </div>
+            <PopUpButton onClick={closePopUp}>Close</PopUpButton>
+          </PopUpContent>
+        </PopUpWrapper>
       )}
     </section>
   );
