@@ -1,19 +1,20 @@
-## To-do
+# Task 1
 
-- [✅] Добавить заголовок и подзаголовок формы. Сделать выравнивание по центру формы.
-- [✅] Добавить обязательное поле ввода имени на половину ширины формы
-- [✅] Добавить поле ввода фамилии на половину ширины формы
-- [✅] Добавить поле ввода email на всю ширину формы
-- [✅] Добавить поле ввода телефона на всю ширину формы
-- [✅] Добавить поле ввода промокода на всю ширину формы. Подпись и сам текст промокода должны быть всегда в верхнем регистре.
-- [✅] Добавить поле Smiley Scale с 5-ю вариантами на всю ширину формы. При наведелнии на каждый элемент, он должен плавно поворачиваться на 45 градусов вправо.
-- [✅] Сделать кнопку отправки формы на всю ширину. Выбрать стиль кнопки Outline.
-- [✅] Сделать градиентный цвет фона. Цвета могут быть любыми, например: синий и красный.
-- [✅] Сделать синий цвет текста ошибки при неправильном заполнении формы.
-- [✅] Сделать скругление углов полей формы 40 пикселей.
-- [✅] Назвать виджет Elfsight Test FB → Опубликовать → План Lite
+## Requirements
 
-## Result
+- [✅] Add header and subheader of the form. Align by center.
+- [✅] Make "First Name" a necessary field. Width 50%.
+- [✅] Make "Surname" field 50% width.
+- [✅] "Email address" & "Phone Number" 100% width.
+- [✅] "Promocode" field 100% width. The text and placeholder must always be in uppercase.
+- [✅] Create "Smiley Scale" field with 5 different variants, 100% width. On variant hover, it must smoothly turn 45 degree right.
+- [✅] Make "Submit" button 100% width and make it outlined.
+- [✅] Make the background gradient.
+- [✅] The form error color must be blue.
+- [✅] Make the `border-radius: 40px`.
+- [✅] Call the widget `Elfsight Test FB` → Publish → Plan "Lite"
+
+### Result
 
 ```html
 <script
@@ -26,3 +27,5 @@
   data-elfsight-app-lazy
 ></div>
 ```
+
+<img src="./task3/public/widget.png">
