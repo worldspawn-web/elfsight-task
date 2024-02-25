@@ -75,7 +75,7 @@ export const RenderCards = () => {
   };
 
   return (
-    <>
+    <section>
       <h2 className={styles.header}>Rick & Morty Wiki</h2>
       <div className={styles.filters}>
         <input
@@ -139,6 +139,6 @@ export const RenderCards = () => {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 };
